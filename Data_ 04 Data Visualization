@@ -1,0 +1,9 @@
+### Data Visualization: Nature of Data
+
+# Numeric data correlation with count, coloured by season
+sns.pairplot(bike_sample,hue='season',palette='coolwarm')
+
+# Categorical data distribution for seasons and working day as per weather conditions
+fig, ax = plt.subplots(1,2,figsize=(15,8))
+sns.boxplot(x='season', y='count', hue='weather',data=bike_sample, palette="coolwarm", ax=ax[0])
+sns.boxplot(x='workingday', y='count', hue='weather',data=bike_sample, palette="coolwarm", ax=ax[1])
