@@ -1,0 +1,26 @@
+### Initializations: Packages import and Data Read
+
+#import packages
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+##data read
+bike_df = pd.read_csv("hour.csv")
+
+##process data to show right data
+bike_df = bike_df.rename(columns = {'weathersit':'weather', 'cnt':'count','mnth':'month','temp':'temperature','hum':'humidity'})
+bike_df['season'] = bike_df['season'].map({1:'Winter', 2:'Spring', 3:'Summer', 4:'Fall'})
+bike_df['yr'] = bike_df['yr'].map({0:'2011', 1:'2012'})
+bike_df['holiday'] = bike_df['holiday'].map({0:'No', 1:'Yes'})
+bike_df['weekday'] = bike_df['weekday'].map({0:'Monday', 1:'Tuesday', 2:'Wednesday', 3:'Thursday', 4:'Friday', 5:'Saturday', 6:'Sunday'})
+bike_df['workingday'] = bike_df['workingday'].map({0:'No', 1:'Yes'})
+bike_df['weather'] = bike_df['weather'].map({1:'Clear', 2:'Cloudy', 3:'Rain', 4:'Storm'})
+
+#bike_df.shape               # column row count
+bike_df.head()              # data peak
+#bike_df.describe()          # statistic details
+#bike_df.info()              # column list
+#bike_df.isna().any()        # check NA
