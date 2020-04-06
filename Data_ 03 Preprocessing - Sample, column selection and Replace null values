@@ -1,0 +1,30 @@
+### Preprocessing: Sample and Column Selection
+# select random smaller sample
+bike_sample = bike_df.sample(frac=.1, random_state=3)               # 10% sample
+
+# select random smaller sample
+#bike_sample = bike_df.query('season == "Winter"')                   # filter by season
+#bike_sample = bike_sample.sample(frac=.25, random_state=3)          # 25% sample
+
+# drop columns
+bike_sample = bike_sample.drop(columns=['instant','dteday'])        # non-numeric non-categoric
+bike_sample = bike_sample.drop(columns=['yr','hr','month'])         # unnecessary date time details
+bike_sample = bike_sample.drop(columns=['holiday','weekday'])       # redundant columns, workingday gives same info
+bike_sample = bike_sample.drop(columns=['atemp'])                   # redundant column, temp gives same info
+bike_sample = bike_sample.drop(columns=['casual','registered'])     # multicollinearity, only total count is final target
+bike_sample.shape               # column row count
+#bike_sample.head()              # data peak
+#bike_sample.describe()          # statistic details
+#bike_sample.info()              # column list
+#bike_sample.isna().any()        # check NA
+
+Preprocessing: Replace Null Values
+# fill null values with column mean value as per season
+bike_sample['temperature'] = bike_sample.groupby('season')['temperature'].transform(lambda x: x.fillna(x.mean()))
+bike_sample['humidity'] = bike_sample.groupby('season')['humidity'].transform(lambda x: x.fillna(x.mean()))
+bike_sample['windspeed'] = bike_sample.groupby('season')['windspeed'].transform(lambda x: x.fillna(x.mean()))
+#bike_sample.shape               # column row count
+bike_sample.head()              # data peak
+#bike_sample.describe()          # statistic details
+#bike_sample.info()              # column list
+#bike_sample.isna().any()        # check NA
