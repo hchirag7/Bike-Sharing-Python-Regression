@@ -1,8 +1,6 @@
 # Bike-Sharing-Python-Regression
 An attempt to study and implement a few regression models with python.
 
-# <font color='red'> Regression
-
 ### Dataset: Description and Details
 
 **Link**: *https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset*
