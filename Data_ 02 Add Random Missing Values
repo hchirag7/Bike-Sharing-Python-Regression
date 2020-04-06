@@ -1,0 +1,28 @@
+###Initializations: Add Missing Values
+
+##add missing values
+#select 5% of total
+miss_count = round(len(bike_df['instant']) * 0.05)
+#add nans to temperature
+miss_index1 = pd.Series(np.random.randint(1,len(bike_df['instant']),miss_count))
+for value in miss_index1:
+    bike_df.at[value,'temperature'] = np.nan
+#add nans to humidity
+miss_index2 = pd.Series(np.random.randint(1,len(bike_df['instant']),miss_count))
+for value in miss_index2:
+    bike_df.at[value,'humidity'] = np.nan
+#add nans to windspeed 
+miss_index3 = pd.Series(np.random.randint(1,len(bike_df['instant']),miss_count))
+for value in miss_index3:
+    bike_df.at[value,'windspeed'] = np.nan
+
+#len(bike_df['instant'])                           # total columns count
+#miss_count                                        # 5% of total
+#miss_index1.head()                                # values in series of random indexes
+#len(miss_index1)                                  # cross check length of series
+#miss_index2.head()                                # values in series of random indexes
+#len(miss_index2)                                  # cross check length of series
+#miss_index3.head()                                # values in series of random indexes
+#len(miss_index3)                                  # cross check length of series
+bike_df.info()                                    # column list
+#bike_df.isna().any()                              # check NA
