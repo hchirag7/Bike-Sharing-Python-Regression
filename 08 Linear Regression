@@ -1,0 +1,43 @@
+### Regression: Linear Regression
+
+# linear regression on all attributes
+lin_R = LinearRegression()
+lin_R.fit(x_train, y_train)
+print('Train Score: %.4f' % lin_R.score(x_train, y_train))
+print('Test Score: %.4f' %lin_R.score(x_test, y_test))
+print('Linear Regression Equation:')
+print('count')
+print('= %.4f' % lin_R.intercept_)
+for i in range(len(lin_R.coef_)):
+    print(' + %.4f * ' % lin_R.coef_[i] + bike_sample.columns[i])
+    
+# linear model for temperature vs count
+x_train_temp = x_train[[2]]
+lin_R_temp = LinearRegression()
+lin_R_temp.fit(x_train_temp, y_train)
+y_predict = lin_R_temp.predict(x_train_temp)
+# equation
+print('Count vs Temperature: Linear Regression')
+print('count = %.4f + %.4f * temperature' % (lin_R_temp.intercept_,lin_R_temp.coef_))
+# linear plot
+plt.plot(x_train_temp, y_predict, c = 'r')
+plt.scatter(x_train_temp,y_train)
+plt.xlabel('Temperature')
+
+### Regression: Linear: Grid Search & Cross Validation
+
+lin_R = LinearRegression()
+parameters = {'normalize':[True,False]}
+
+# grid search
+best_linR = GridSearchCV(lin_R,parameters, cv=6, return_train_score=True)
+best_linR.fit(x_train, y_train)
+print("Best parameters: {}".format(best_linR.best_params_))
+print("Best cross-validation score: {:.4f}".format(best_linR.best_score_))
+all_models['Model'].append('Linear Regression')
+all_models['Cross Validation Score'].append(best_linR.best_score_)
+
+# cross validation
+MSEs = cross_val_score(lin_R, Xs, Ys, cv=5)
+mean_MSE = np.mean(MSEs)
+print('Average Cross Validation Score: %.4f' % mean_MSE)
