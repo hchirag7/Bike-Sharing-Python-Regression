@@ -1,0 +1,58 @@
+### Regression: KNN Regressor
+
+rmse_val = []                                                # to store rmse values for different k
+train_score_array = []
+test_score_array = []
+for K in range(1,20):
+    knn_R = KNeighborsRegressor(K)
+    knn_R.fit(x_train, y_train)                               # fit the model
+
+    pred=knn_R.predict(x_test)                                # make prediction on test set
+    error = sqrt(mean_squared_error(y_test,pred))             # calculate rmse
+    rmse_val.append(error)                                    # store rmse values
+
+    train_score_array.append(knn_R.score(x_train, y_train))   # calc train score
+    test_score_array.append(knn_R.score(x_test, y_test))      # calc test score
+
+# plotting KNN score values and Elbow curve
+fig, ax = plt.subplots(1,2,figsize=(15,5))
+x_axis = range(1,20)
+for i in range(1, 3):
+    plt.subplot(1, 2, i)
+    if i == 1:
+        plt.plot(x_axis, train_score_array, c = 'g', label = 'Train Score')
+        plt.plot(x_axis, test_score_array, c = 'b', label = 'Test Score')
+        plt.legend()
+        plt.xlabel('k')
+        plt.ylabel('MSE')
+        plt.title('KNN Score Values')
+    if i == 2:
+        plt.plot(x_axis,rmse_val, label='Error')
+        plt.legend()
+        plt.xlabel('k')
+        plt.ylabel('RMSE')
+        plt.title('Predicted vs Actual: RMSE (Elbow curve)')
+        
+### Regression: KNN Regressor: GridSearchCV
+
+params = {'n_neighbors':[2,3,4,5,6,7,8,9,10]}
+knn_R = KNeighborsRegressor()
+
+best_KnnR = GridSearchCV(knn_R, params, cv=5)
+best_KnnR.fit(x_train,y_train)
+k = best_KnnR.best_params_['n_neighbors']
+
+all_models['Model'].append('KNN Regression')
+all_models['Cross Validation Score'].append(best_KnnR.best_score_)
+
+print('KNN Regression')
+print('Best K: %d' % k)
+print('Train Score: %.4f' % best_KnnR.score(x_train, y_train))
+print('Test Score: %.4f' % best_KnnR.score(x_test, y_test))
+print('Cross Validation Score: %.4f' % best_KnnR.best_score_)
+
+### Regression: KNN Regressor: Cross Validation
+
+MSEs = cross_val_score(knn_R, Xs, Ys, cv=5)
+mean_MSE = np.mean(MSEs)
+print('Average Cross Validation Score: %.4f' % mean_MSE)
