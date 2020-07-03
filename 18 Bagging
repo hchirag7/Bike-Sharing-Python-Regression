@@ -1,0 +1,20 @@
+# Bagging: SVR Simple
+bag_svrR = BaggingRegressor(base_estimator=LinearSVR(), bootstrap=True, random_state=0, oob_score=False)
+bag_svrR_param = {'base_estimator__C': [0.01, 0.1, 1, 10, 100],'base_estimator__epsilon' : [0.01, 0.1, 1, 10, 100],
+                  'n_estimators': [10,25]}
+best_bag_svrR = GridSearchCV(bag_svrR, bag_svrR_param, cv=6, return_train_score=True, )
+best_bag_svrR.fit(x_train,y_train)
+y_pred = best_bag_svrR.predict(x_test)
+
+model_df.at[5,'Bagging'] = best_bag_svrR.best_score_
+printModSpecs(best_bag_svrR)
+
+# Bagging: SVR Linear
+bag_svrLR = BaggingRegressor(base_estimator=SVR(kernel='linear'), bootstrap=True, random_state=0, oob_score=False)
+bag_svrLR_param = {'base_estimator__C': [0.01,0.1, 1, 10, 100],'n_estimators': [10,25]}
+best_bag_svrLR = GridSearchCV(bag_svrLR, bag_svrLR_param, cv=6, return_train_score=True, )
+best_bag_svrLR.fit(x_train,y_train)
+y_pred = best_bag_svrLR.predict(x_test)
+
+model_df.at[6,'Bagging'] = best_bag_svrLR.best_score_
+printModSpecs(best_bag_svrLR)
