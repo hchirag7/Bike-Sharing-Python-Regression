@@ -1,0 +1,21 @@
+# Adaboosting: SVR Simple
+adr_svrR =AdaBoostRegressor(base_estimator=SVR(),random_state=42)
+adr_svrR_param = {'base_estimator__C': [0.01, 0.1, 1, 10, 100],'base_estimator__epsilon' : [0.01, 0.1, 1, 10, 100],
+                  'n_estimators' : [100,150],'learning_rate' : [0.5,1.0,2],}
+best_adr_svrR = GridSearchCV(adr_svrR, adr_svrR_param,cv=5, return_train_score=True, )
+best_adr_svrR.fit(x_train,y_train)
+y_pred = best_adr_svrR.predict(x_test)
+
+model_df.at[5,'Adaboosting'] = best_adr_svrR.best_score_
+printModSpecs(best_adr_svrR)
+
+# Adaboosting: SVR Linear
+adr_svrLR =AdaBoostRegressor(base_estimator=SVR(kernel='linear'),random_state=42)
+adr_svrLR_param = {'base_estimator__C': [0.01, 0.1, 1, 10, 100],'base_estimator__epsilon' : [0.01, 0.1, 1, 10, 100],
+                  'n_estimators' : [100,150],'learning_rate' : [0.5,1.0,2],}
+best_adr_svrLR = GridSearchCV(adr_svrLR, adr_svrLR_param,cv=5, return_train_score=True, )
+best_adr_svrLR.fit(x_train,y_train)
+y_pred = best_adr_svrLR.predict(x_test)
+
+model_df.at[6,'Adaboosting'] = best_adr_svrLR.best_score_
+printModSpecs(best_adr_svrLR)
