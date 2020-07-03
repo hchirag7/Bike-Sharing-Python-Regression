@@ -1,5 +1,5 @@
 # Bike-Sharing-Python-Regression
-Performing data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints and implemented a few regression models with python.
+Performing data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints and implemented a Machine Learning models with Python including Regression models, bagging - boosting - pasting, Principal component analysis and deep learning model.
 <hr>
 
 ## Project Highlight
@@ -17,7 +17,7 @@ Apart from interesting real world applications of bike sharing systems, the char
 
 **Initial Analysis:** Dataset is supposed to have few missing values and some pre-processed columns. These columns will first be converted to view their original data and processed as per teachings of the course.
 
-**Project Objective:** Data has attributes like season, year, month, hour, holiday, weekday, working day, weather situation, temperature, humidity, windspeed. These features might correspond to total rental bikes. Our objective is to:
+**Project Objective Phase 1:** Data has attributes like season, year, month, hour, holiday, weekday, working day, weather situation, temperature, humidity, windspeed. These features might correspond to total rental bikes. Our objective is to:
 * Initializations: Process data correctly to reflect right data impute missing values if required
 * Preprocessing: Preprocess data for our machine learning models
 * Data Visualization
@@ -31,3 +31,29 @@ Apart from interesting real world applications of bike sharing systems, the char
 * Grid Search for best parameters
 * Cross-Validaiton to find average training and test scores
 * Best Regressor with best parameters
+
+**Project Objective Phase 2:** We'll continue implementing new algorithms and adding to main comparison table for accuracy. We'll apply PCA and reiterate previously run models for checking improvement in accuracy. Focussed implementation includes:
+* Apply Bagging on:
+    1. Simple SVR
+    2. Linear SVR
+* Apply Pasting:
+    1. Simple SVR
+    2. Linear SVR
+* Apply Adaboost:
+    1. Simple SVR
+    2. Linear SVR
+* Visualize accuracy comparison between Grid Search, Bagging, Pasting and Adaboost.
+* Apply Gradient Boosting
+* PCA Data initialisations
+* Post-PCA Model Re-runs:
+    1. KNN regressor
+    2. Linear regression
+    3. Ridge
+    4. Lasso
+    5. Polynomial regression
+    6. SVM (simple, rbf, poly, linear)
+* PCA Results Comparison:
+    1. Visualization - Bar Graph Comparison
+    2. Table Comparison
+    3. Result Automation
+* Apply Deep Learning model.
