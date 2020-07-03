@@ -1,0 +1,21 @@
+# Pasting: SVR Simple
+pas_svrR = BaggingRegressor(base_estimator=SVR(), bootstrap=False, random_state=0, oob_score=False)
+pas_svrR_param = {'base_estimator__C': [0.01, 0.1, 1, 10, 100],'base_estimator__epsilon' : [0.01, 0.1, 1, 10, 100],
+                  'n_estimators': [10,25]}
+best_pas_svrR = GridSearchCV(pas_svrR, pas_svrR_param, cv=6, return_train_score=True, )
+best_pas_svrR.fit(x_train,y_train)
+y_pred = best_pas_svrR.predict(x_test)
+
+model_df.at[5,'Pasting'] = best_pas_svrR.best_score_
+printModSpecs(best_pas_svrR)
+
+# Pasting: SVR Linear
+pas_svrLR = BaggingRegressor(base_estimator=SVR(kernel='linear'), bootstrap=False, random_state=0, oob_score=False)
+pas_svrLR_param = {'base_estimator__C': [0.01, 0.1, 1, 10, 100],'base_estimator__epsilon' : [0.01, 0.1, 1, 10, 100],
+                  'n_estimators': [10,25]}
+best_pas_svrLR = GridSearchCV(pas_svrLR, pas_svrLR_param, cv=6, return_train_score=True, )
+best_pas_svrLR.fit(x_train,y_train)
+y_pred = best_pas_svrLR.predict(x_test)
+
+model_df.at[6,'Pasting'] = best_pas_svrLR.best_score_
+printModSpecs(best_pas_svrLR)
