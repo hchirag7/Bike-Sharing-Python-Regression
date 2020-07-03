@@ -1,0 +1,24 @@
+
+# Relevant Imports
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import VotingRegressor
+from sklearn.ensemble import BaggingRegressor
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.decomposition import PCA
+from keras.models import Sequential
+from keras.layers import Dense
+
+# Expanding the result dataframe
+model_df = pd.DataFrame(data = all_models)
+model_df.columns = ['Model','Grid Search']
+model_df['PCA'] = np.nan
+model_df
+
+# function for printing model's best score & parameters, and train, test & r2 scores
+def printModSpecs(mod):
+    print(f'Best Mean Cross Validation Score: {mod.best_score_}')
+    print(f'Best Parameters: {mod.best_params_}')
+    print(f'Train score: {mod.score(x_train,y_train)}')
+    print(f'Test score: {mod.score(x_test,y_test)}')
+    print('r2_score: ', r2_score(y_test,y_pred))
