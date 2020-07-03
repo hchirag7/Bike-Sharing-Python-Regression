@@ -1,0 +1,12 @@
+# Gradient Boosting
+gbr= GradientBoostingRegressor(random_state=42)
+gbr_param = {
+              'max_depth' : [2,3,4],
+              'n_estimators' : [25,100],
+              'learning_rate' : [0.5,1.0,2],
+             }
+best_gbr = GridSearchCV(gbr, gbr_param,cv=5, return_train_score=True, )
+best_gbr.fit(x_train,y_train)
+y_pred = best_gbr.predict(x_test)
+
+printModSpecs(best_gbr)
