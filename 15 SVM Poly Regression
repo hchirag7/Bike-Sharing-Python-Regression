@@ -1,0 +1,34 @@
+parms_svr = {'C': [1, 10, 100,1000,10000],'degree':[1,3]}
+
+# grid search for best parameters
+svrP_R = SVR(kernel='poly')
+best_svrPR = GridSearchCV(estimator = svrP_R, param_grid = parms_svr, return_train_score=True, n_jobs= -1,cv=3)
+best_svrPR.fit(x_train,y_train)
+result_svr = pd.DataFrame(best_svrPR.cv_results_)
+all_models['Model'].append('Poly SVR Regression')
+all_models['Cross Validation Score'].append(best_svrPR.best_score_)
+
+# simple SVM with best parameters
+svrP_R = SVR(kernel = 'linear',C = best_svrPR.best_params_['C'])
+svrP_R.fit(x_train, y_train)
+
+# cross validation matrix
+kfold = KFold(n_splits = 6)
+scores = cross_val_score(svrP_R, x_train, y_train, cv=kfold)
+
+print('Best Model:')
+print('Parameters: {}'.format(best_svrPR.best_params_))
+print('Cross-validation score: {:.4f}'.format(best_svrPR.best_score_))
+print('Train Score: %.4f' % svrP_R.score(x_train, y_train))
+print('Test Score: %.4f' % svrP_R.score(x_test, y_test))
+print('Average Cross Validation: %.4f' % np.mean(scores))
+
+
+plt.plot(range(result_svr.shape[0]), result_svr['mean_train_score'], label = 'mean train score')
+plt.plot(range(result_svr.shape[0]), result_svr['mean_test_score'], label = 'mean test score')
+plt.xticks(range(result_svr.shape[0]), result_svr['param_C'], rotation = 90)
+plt.plot([best_svrPR.best_index_], result_svr['mean_train_score'][best_svrPR.best_index_], 'o', markersize = 10, fillstyle = "none")
+plt.plot([best_svrPR.best_index_], result_svr['mean_test_score'][best_svrPR.best_index_], 'o', markersize = 10, fillstyle = "none")
+plt.grid()
+plt.legend()
+plt.xlabel('C')
