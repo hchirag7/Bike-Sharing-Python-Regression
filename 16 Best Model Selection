@@ -1,0 +1,37 @@
+# Best Model: Selection
+model_df = pd.DataFrame(data = all_models)
+model_df
+
+# selecting best model with maximum score 
+best_model = model_df.loc[model_df['Cross Validation Score'].idxmax()]
+best_model
+
+best_model_name = best_model['Model'].replace(' Regression','')
+
+# selecting best model for all predictions
+if best_model_name == 'KNN':
+    y_pred = best_KnnR.predict(Xs)
+if best_model_name == 'Linear':
+    y_pred = best_linR.predict(Xs)
+if best_model_name == 'Ridge':
+    y_pred = best_ridR.predict(Xs)
+if best_model_name == 'Lasso':
+    y_pred = best_lasR.predict(Xs)
+if best_model_name == 'Polynomial':
+    y_pred = best_polR.predict(Xs)
+if best_model_name == 'Simple SVR':
+    y_pred = best_svrR.predict(Xs)
+if best_model_name == 'Linear SVR':
+    y_pred = best_svrLR.predict(Xs)
+if best_model_name == 'RBF SVR':
+    y_pred = best_svrRR.predict(Xs)
+if best_model_name == 'Poly SVR':
+    y_pred = best_svrPR.predict(Xs)
+    
+# plot predicted vs actual values
+plt.scatter(Ys, y_pred)
+plt.title(best_model['Model'])
+plt.xlabel('Actual Count')
+plt.ylabel('Predicted Count')
+plt.plot([0, 500], [0, 500], 'red', label = 'Expected response')
+plt.legend()
