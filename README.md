@@ -1,8 +1,14 @@
 # Bike-Sharing-Python-Regression
-An attempt to study and implement a few regression models with python.
+Performing data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints and implemented a few regression models with python.
+<hr>
 
-### Dataset: Description and Details
+## Project Highlight
+1. Performed data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints using Python Jupyter Notebook
+2. Forecasted 80% accurate count of rentals as per season, working days and weather details for better anticipation of bookings
+3. Implemented Machine Learning models for regression like KNN, Linear, Polynomial, Ridge, Lasso, SVM simple and kernel based
+<hr>
 
+## Project Introduction & Scope
 **Link**: *https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset*
 
 **Description:** Bike sharing systems are new generation of traditional bike rentals where whole process from membership, rental and return back has become automatic. Through these systems, user is able to easily rent a bike from a particular position and return back at another position. Currently, there are about over 500 bike-sharing programs around the world which is composed of over 500 thousands bicycles. Today, there exists great interest in these systems due to their important role in traffic, environmental and health issues.
