@@ -1,5 +1,5 @@
 # Bike-Sharing-Python-Regression
-Performing data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints and implemented a Machine Learning models with Python including Regression models, bagging - boosting - pasting, Principal component analysis and deep learning model.
+Performing data cleaning, preprocessing for 2 years of bike rental service with 17,000 datapoints and implemented a Machine Learning models with Python including Regression, Ensemble Learning, Dimension Reduction and Deep Learning.
 <hr>
 
 ## Project Highlight
